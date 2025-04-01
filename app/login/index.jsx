@@ -194,7 +194,7 @@ export default function LoginScreen() {
                 marginBottom: 10 // Reduced bottom margin
               }}
             >
-              Welcome to CampusLink
+              Welcome to CommunityLink
             </Text>
             
             <Text 
@@ -208,7 +208,7 @@ export default function LoginScreen() {
                 paddingHorizontal: 10
               }}
             >
-              Where Ideas Take Flight. Connect, collaborate, and engage in campus events, workshops, and clubs.
+              Where Ideas Take Flight. Connect, collaborate, and engage in community events, conference and meet-ups.
             </Text>
             
             <Animated.View 

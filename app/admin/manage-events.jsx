@@ -83,6 +83,13 @@ export default function AddNew() {
                     delete fieldErrors.category;
                 }
                 break;
+                case 'whatsappNo':
+                    if (!value || value.length !== 10) {
+                        fieldErrors.whatsappNo = 'Please enter a valid 10-digit WhatsApp number';
+                    } else {
+                        delete fieldErrors.whatsappNo;
+                    }
+                    break;
             case 'Mail':
                 if (!value || value.trim() === '') {
                     fieldErrors.Mail = 'Email is required';
@@ -111,6 +118,15 @@ export default function AddNew() {
                 // No validation needed as it's optional
                 delete fieldErrors.Insta;
                 break;
+                case 'price':
+                    if (value === 0) {
+                        fieldErrors.price = 'Price is required. Write 0 if free';
+                    } else if (value < 0) {
+                        fieldErrors.price = 'Price cannot be negative';
+                    } else {
+                        delete fieldErrors.price;
+                    }
+                    break;
         }
         
         setErrors(fieldErrors);
@@ -162,7 +178,7 @@ export default function AddNew() {
 
     const validateForm = () => {
         // Modified to only include required fields
-        const requiredFields = ['name', 'category', 'Mail', 'About'];
+        const requiredFields = ['name', 'category', 'Mail', 'About', 'whatsappNo'];
         let formErrors = {};
         let isValid = true;
         
@@ -236,7 +252,9 @@ export default function AddNew() {
                 // Set defaults for optional fields if they're empty
                 Time: formData.Time || new Date().toISOString().split('T')[0],
                 formUrl: formData.formUrl || '',
-                Insta: formData.Insta || ''
+                Insta: formData.Insta || '',
+                whatsappNo: formData.whatsappNo,
+                price: formData.price
             };
     
             await addDoc(collection(db, 'Works'), finalFormData);
@@ -334,6 +352,31 @@ export default function AddNew() {
                         />
                         {errors.formUrl && <Text style={styles.errorText}>{errors.formUrl}</Text>}
                     </View>
+                    <View style={styles.inputContainer}>
+   <Text style={styles.label}>WhatsApp Number *</Text>
+   <TextInput
+       style={[styles.input, errors.whatsappNo && styles.inputError]}
+       placeholder="Enter WhatsApp Number"
+       value={formData.whatsappNo || ''}
+       onChangeText={(value) => handleInputChange('whatsappNo', value)}
+       placeholderTextColor={Colors.GRAY}
+   />
+   {errors.whatsappNo && <Text style={styles.errorText}>{errors.whatsappNo}</Text>}
+</View>
+<View style={styles.inputContainer}>
+    <Text style={styles.label}>Price (Optional)</Text>
+    <TextInput
+        style={styles.input}
+        placeholder="Leave empty if free"
+        keyboardType="numeric"
+        value={formData.price || ''}
+        onChangeText={(value) => {
+            const numericValue = value.replace(/[^0-9]/g, '');
+            handleInputChange('price', numericValue ? parseInt(numericValue) : null);
+        }}
+        placeholderTextColor={Colors.GRAY}
+    />
+</View>
 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Instagram Handle (Optional)</Text>

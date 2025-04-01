@@ -9,8 +9,14 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/FirebaseConfig';
 import { useTheme } from '../../context/ThemeContext';
 
-const CategorySelector = ({ categories, selectedCategory, onSelectCategory, colors }) => {
+const categoryMapping = {
+  'Community Groups': 'Clubs',
+  'Skill Development Events': 'Hackathon',
+  'Local Events & Meetups': 'Events',
+  'Conference Catchups': 'Intern'
+};
 
+const CategorySelector = ({ categories, selectedCategory, onSelectCategory, colors }) => {
   return (
     <View style={styles.categoryContainer}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -19,23 +25,17 @@ const CategorySelector = ({ categories, selectedCategory, onSelectCategory, colo
             key={category}
             style={[
               styles.categoryItem,
-              { backgroundColor: colors.card, borderColor: colors.border }, 
+              { backgroundColor: colors.card, borderColor: colors.border },
               selectedCategory === category && { backgroundColor: '#FFD700', borderColor: '#FFD700' }
             ]}
-            
-            
-            
             onPress={() => onSelectCategory(category)}
           >
             <Text
               style={[
                 styles.categoryText,
-                { color: colors.text }, 
-                selectedCategory === category && { color: 'black' } // ✅ Change to black for readability
+                { color: colors.text },
+                selectedCategory === category && { color: 'black' }
               ]}
-              
-              
-              
             >
               {category}
             </Text>
@@ -47,13 +47,12 @@ const CategorySelector = ({ categories, selectedCategory, onSelectCategory, colo
 };
 
 export default function HomeScreen() {
-
   const { colors, isDarkMode } = useTheme();
   const [SRMList, setSRMList] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('Clubs');
+  const [selectedCategory, setSelectedCategory] = useState('Community Groups');
 
-  const categories = ['Clubs', 'Hackathon', 'Events', 'Intern'];
+  const categories = ['Community Groups', 'Skill Development Events', 'Local Events & Meetups', 'Conference Catchups'];
 
   const handleCategoryChange = useCallback((category) => {
     console.log("Category changed to:", category);
@@ -65,7 +64,8 @@ export default function HomeScreen() {
     setLoader(true);
     setSRMList([]);
 
-    const q = query(collection(db, 'Works'), where('category', '==', category));
+    const mappedCategory = categoryMapping[category] || category;
+    const q = query(collection(db, 'Works'), where('category', '==', mappedCategory));
     const querySnapshot = await getDocs(q);
 
     const fetchedList = querySnapshot.docs.map(doc => ({
@@ -78,15 +78,13 @@ export default function HomeScreen() {
   };
 
   useEffect(() => {
-    fetchListForCategory('Clubs');
+    fetchListForCategory(selectedCategory);
   }, []);
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
-    <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} backgroundColor={colors.background} />
-
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}> 
+      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} backgroundColor={colors.background} />
+      <View style={[styles.container, { backgroundColor: colors.background }]}> 
         <Header />
         <FlatList
           data={SRMList}
@@ -101,11 +99,10 @@ export default function HomeScreen() {
                 categories={categories}
                 selectedCategory={selectedCategory}
                 onSelectCategory={handleCategoryChange}
-                colors={colors} // 🔥 Pass colors as a prop
+                colors={colors} 
               />
-
               <View style={styles.currentCategoryContainer}>
-              <Text style={[styles.currentCategory, { color: colors.text }]}>
+                <Text style={[styles.currentCategory, { color: colors.text }]}>
                   {selectedCategory} ({SRMList.length})
                 </Text>
               </View>
@@ -115,7 +112,6 @@ export default function HomeScreen() {
             !loader && (
               <View style={styles.emptyContainer}>
                 <Text style={[styles.emptyText, { color: colors.text }]}>No items found in {selectedCategory}</Text>
-
               </View>
             )
           }
@@ -128,7 +124,6 @@ export default function HomeScreen() {
               <View style={styles.loaderContainer}>
                 <ActivityIndicator size="large" color={Colors.PRIMARY} />
                 <Text style={[styles.loadingText, { color: colors.text }]}>Loading {selectedCategory}...</Text>
-
               </View>
             )
           }
@@ -169,17 +164,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.GRAY,
   },
-  selectedCategoryItem: {
-    backgroundColor: Colors.PRIMARY,
-    borderColor: Colors.PRIMARY,
-  },
   categoryText: {
     fontFamily: 'outfit-med',
-    fontSize: 14,
-    color: Colors.GRAY,
-  },
-  selectedCategoryText: {
-    color: Colors.WHITE,
   },
   currentCategoryContainer: {
     marginTop: 15,
@@ -189,7 +175,6 @@ const styles = StyleSheet.create({
     fontFamily: 'outfit-med',
     fontSize: 18,
   },
-  
   loaderContainer: {
     justifyContent: 'center',
     alignItems: 'center',

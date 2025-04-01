@@ -19,23 +19,23 @@ export default function HelpSupport() {
     const faqs = [
         {
             id: 1,
-            question: "How do I join a club?",
-            answer: "To join a club, browse through the clubs listed in the app and click on the 'Apply' button on the club's page. You can explore clubs by category or search for specific interests."
+            question: "How do I discover local community groups?",
+            answer: "To discover community groups in your area, use the 'Discover Nearby' feature and browse through groups by category or distance. When you find an interesting group, tap 'Follow' to stay updated with their activities and events."
         },
         {
             id: 2,
-            question: "How can I become an admin for my club?",
-            answer: "If you are a club leader wanting to manage your club's posts, email our support team at thisiscampuslink@gmail.com with your club details. We'll help you set up admin access quickly."
+            question: "How can I create and manage my local group?",
+            answer: "If you're organizing a local community initiative, tap on 'Create Group' from your profile. Once approved, you'll get admin access to post events, manage members, and share updates that will be visible to people in your locality."
         },
         {
             id: 3,
-            question: "How do I post an event?",
-            answer: "Club admins can easily create events by navigating to the 'Add post' section. Fill in event details, upload a cover image, and set event parameters."
+            question: "How do I add a local event or opportunity?",
+            answer: "Group admins can create local events by tapping 'Add Local Listing' from the dashboard. Fill in event details including location, time, cover image, and set a visibility radius to help nearby community members discover your event."
         },
         {
             id: 4,
-            question: "Who can I contact for technical issues?",
-            answer: "For any technical assistance or account-related queries, please reach out to our dedicated support team at thisiscampuslink@gmail.com. We aim to respond within 24 hours."
+            question: "Who can I contact for technical assistance?",
+            answer: "For any technical issues, account questions, or help with promoting your local initiatives, contact our dedicated support team at thisiscampuslink@gmail.com. We're committed to supporting community connections and typically respond within 24 hours."
         }
     ];
 
@@ -44,7 +44,7 @@ export default function HelpSupport() {
             id: 1,
             name: "Kriithik SS",
             role: "Lead Developer",
-            bio: "Full-stack developer with expertise in React Native and mobile app architecture.",
+            bio: "Full-stack developer specializing in location-based community platforms and React Native applications.",
             linkedIn: "https://www.linkedin.com/in/kriithikss?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
             image: require('../../assets/images/kriithik.jpg'),
         },
@@ -52,7 +52,7 @@ export default function HelpSupport() {
             id: 2,
             name: "Kathir Chelvan",
             role: "Lead Developer",
-            bio: "Full-stack developer, with expertise in React Native and mobile app architecture.",
+            bio: "Full-stack developer focused on creating technology that strengthens local community connections.",
             linkedIn: "https://in.linkedin.com/in/kathirchelvan-ilamparithim-76666828a",
             image: require('../../assets/images/kathir.jpg'),
         }
@@ -74,11 +74,11 @@ export default function HelpSupport() {
             <Animated.View style={{...styles.content, opacity: fadeAnim}}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.headerIcon}>❓</Text>
-                    <Text style={styles.title}>Help & Support</Text>
+                    <Text style={styles.title}>Community Support</Text>
                 </View>
                 
                 <Text style={styles.description}>
-                    Welcome to CampusLink! We're here to help you navigate and make the most of our platform.
+                    Welcome to CommunityLink! Discover local events, groups, and opportunities happening right in your neighborhood, even when offline.
                 </Text>
 
                 <View style={styles.faqSection}>
@@ -118,9 +118,9 @@ export default function HelpSupport() {
                     activeOpacity={0.8}
                 >
                     <View style={styles.contactGradient}>
-                        <Text style={styles.contactTitle}>Contact Support</Text>
+                        <Text style={styles.contactTitle}>Contact Local Support</Text>
                         <Text style={styles.contactText}>
-                            Need personalized help? Reach out to our support team.
+                            Need help with finding nearby events or managing your community initiatives? Our team is here to support your local connections.
                         </Text>
                         <View style={styles.emailContainer}>
                             <Text style={styles.emailIcon}>✉️</Text>
@@ -131,7 +131,7 @@ export default function HelpSupport() {
 
                 <View style={styles.developersSection}>
                     <Text style={styles.sectionTitle}>Meet Our Developers</Text>
-                    <Text style={styles.sectionSubtitle}>The talented team behind CampusLink</Text>
+                    <Text style={styles.sectionSubtitle}>The team building technology for local communities</Text>
                     
                     <View style={styles.developersContainer}>
                         {developers.map((developer) => (
@@ -170,8 +170,8 @@ export default function HelpSupport() {
                 </View>
 
                 <View style={styles.footer}>
-                    <Text style={styles.footerText}>CampusLink © 2025</Text>
-                    <Text style={styles.footerSubtext}>Connecting Campus Communities</Text>
+                    <Text style={styles.footerText}>CommunityLink © 2025</Text>
+                    <Text style={styles.footerSubtext}>Connecting Neighbors, Strengthening Communities</Text>
                 </View>
             </Animated.View>
         </ScrollView>

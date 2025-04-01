@@ -22,9 +22,9 @@ export default function Profile() {
 
   const Menu = [
     { id: 1, name: 'Favorites', icon: 'heart', path: '/(tabs)/favorite' },
-    { id: 3, name: 'My Registered Events', icon: 'calendar', path: '/profile/my-events' },
-    { id: 5, name: 'Search', icon: 'search', path: '/(tabs)/search' },
-    { id: 4, name: 'Help & Support', icon: 'help-circle', path: '/profile/help-support' },
+    { id: 3, name: 'My Saved Events and Listings', icon: 'calendar', path: '/profile/my-events' },
+    { id: 5, name: 'Discover Nearby Opportunities', icon: 'search', path: '/(tabs)/search' },
+    { id: 4, name: 'Community Support', icon: 'help-circle', path: '/profile/help-support' },
     { id: 6, name: 'Logout', icon: 'exit', path: 'logout' }
   ];
 

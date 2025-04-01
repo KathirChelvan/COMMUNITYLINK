@@ -90,7 +90,7 @@ export default function MyRegisteredEvents() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>My Registered Events</Text>
+            <Text style={styles.title}>My Saved Events and Listings</Text>
 
             {loading && !refreshing ? (
                 <View style={styles.loadingContainer}>

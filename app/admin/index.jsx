@@ -98,28 +98,28 @@ const AdminDashboard = () => {
   
   const menuItems = [
     {
-      title: 'Add Post',
+      title: 'Add a Local Event or Group',
       description: 'Add a new post for an event or club',
       icon: 'add-circle',
       route: '/admin/manage-events',
       color: '#4F46E5'
     },
     {
-      title: 'Manage Posts',
-      description: 'Edit or delete campus posts',
+      title: 'Edit or Remove Listings',
+      description: 'Edit or delete community posts',
       icon: 'document-text',
       route: '/admin/user-management',
       color: '#0891B2'
     },
     {
-      title: 'Manage Applicants',
-      description: 'View and approve student applications',
+      title: 'Manage Community Members',
+      description: 'View and approve manage memberships',
       icon: 'people',
       route: '/admin/manage-applicants',
       color: '#059669'
     },
     {
-      title: 'Analytics',
+      title: "User Engagement Insights",
       description: 'View event participation and app usage',
       icon: 'bar-chart',
       route: '/admin/analytics',
