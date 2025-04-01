@@ -8,8 +8,19 @@ import { Ionicons } from '@expo/vector-icons';
 const { width } = Dimensions.get('window');
 const itemWidth = (width - 50) / 2; // Account for padding and gap
 
+// Category mapping for display
+const displayMapping = {
+  'Clubs': 'Community Groups',
+  'Hackathon': 'Skill Development Events',
+  'Events': 'Local Events & Meetups',
+  'Intern': 'Conference Catchups'
+};
+
 export default function SRMListItem({ SRM }) {
   const router = useRouter();
+  
+  // Get the display category from mapping or use the original category
+  const displayCategory = displayMapping[SRM.category] || SRM.category;
 
   return (
     <TouchableOpacity 
@@ -49,7 +60,7 @@ export default function SRMListItem({ SRM }) {
         
         <View style={styles.footer}>
           <View style={styles.categoryTag}>
-            <Text style={styles.categoryText}>{SRM.category}</Text>
+            <Text style={styles.categoryText}>{displayCategory}</Text>
           </View>
           
           <TouchableOpacity style={styles.infoButton}>
